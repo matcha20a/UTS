@@ -317,10 +317,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
             transition: transform 0.3s ease;
         }
 
+        .gallery-item img {
+            width: 60%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
         .gallery-item:hover {
             transform: scale(1.05);
         }
@@ -625,7 +630,9 @@
             <p>Browse through our collection of beautiful cakes created for various occasions.</p>
             
             <div class="gallery-grid">
-                <div class="gallery-item">🎂</div>
+                <div class="gallery-item">
+                    <img src="img/birthday-cake.jpg" alt="Birthday Cake Icon">
+                </div>
                 <div class="gallery-item">💒</div>
                 <div class="gallery-item">🧁</div>
                 <div class="gallery-item">🍰</div>
