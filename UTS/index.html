@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Delights - Premium Cake Company</title>
+    <style>
+              * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background: #faf8f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo::before {
+            content: "🍰";
+            margin-right: 0.5rem;
+            font-size: 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(139,69,19,0.8), rgba(210,105,30,0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23FFF8DC" width="1200" height="400"/><circle fill="%23FFE4B5" cx="200" cy="100" r="50"/><circle fill="%23FFDAB9" cx="400" cy="200" r="30"/><circle fill="%23FFE4B5" cx="800" cy="150" r="40"/><circle fill="%23FFDAB9" cx="1000" cy="250" r="35"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .cta-button {
+            background: #FF6B6B;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+        }
+
+        .cta-button:hover {
+            background: #FF5252;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255,107,107,0.6);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page {
+            display: none;
+            padding: 4rem 0;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .page h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #8B4513;
+            text-align: center;
+        }
+
+        .page h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #D2691E;
+        }
+
+        .page p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h4 {
+            color: #8B4513;
+            margin-bottom: 1rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h4 {
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #FF6B6B;
+            margin-top: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #8B4513;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #D2691E;
+        }
+
+        footer {
+            background: #8B4513;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #FFE4B5;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: #FFE4B5;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: linear-gradient(45deg, #FFE4B5, #FFDAB9);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .product-image img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-image img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Sweet Delights</div>
+            <nav>
+  <ul>
+    <li>
+      <a href="javascript:void(0);" onclick="toggleDropdown()">About Us ▾</a>
+      <ul id="dropdown" style="display:none; list-style:none; padding-left:1rem;">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#products" class="nav-link">Products</a></li>
+        <li><a href="#custom" class="nav-link">Custom Orders</a></li>
+        <li><a href="#recipes" class="nav-link">Recipes</a></li>
+        <li><a href="#franchise" class="nav-link">Franchise</a></li>
+        <li><a href="#careers" class="nav-link">Careers</a></li>
+        <li><a href="#about" class="nav-link">About Us</a></li>
+      </ul>
+    </li>
+    <li><a href="#news" class="nav-link">News & Events</a></li>
+    <li><a href="#gallery" class="nav-link">Gallery</a></li>
+    <li><a href="#contact" class="nav-link">Contact</a></li>
+  </ul>
+</nav>
+
+<script>
+  function toggleDropdown() {
+    var menu = document.getElementById("dropdown");
+    if (menu.style.display === "none") {
+      menu.style.display = "block";
+    } else {
+      menu.style.display = "none";
+    }
+  }
+</script>
+
+        </div>
+    </header>
+
+    <div id="home" class="page active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Sweet Delights Bakery</h1>
+                <p>Creating magical moments with every bite since 1995</p>
+                <a href="#products" class="cta-button">Explore Our Cakes</a>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Why Choose Sweet Delights?</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon">🎂</div>
+                    <h4>Premium Quality</h4>
+                    <p>We use only the finest ingredients sourced from trusted suppliers to ensure every cake is perfect.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">👨‍🍳</div>
+                    <h4>Expert Bakers</h4>
+                    <p>Our team of skilled bakers brings years of experience and passion to every creation.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎨</div>
+                    <h4>Custom Designs</h4>
+                    <p>From birthday parties to weddings, we create personalized cakes that make your celebration special.</p>
+                </div>
+            </div>
+
+            <h3>Our Popular Categories</h3>
+            <div class="grid-2">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/birthday-cake.png" alt="Birthday Cake Icon">
+                    </div>
+                    <div class="product-info">
+                        <h4>Birthday Cakes</h4>
+                        <p>Colorful, fun, and delicious birthday cakes for all ages.</p>
+                        <div class="price">Starting from $25</div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/wedding-cake.png" alt="Wedding Cake Icon">
+                    </div>
+                    <div class="product-info">
+                        <h4>Wedding Cakes</h4>
+                        <p>Elegant multi-tier wedding cakes that make your special day unforgettable.</p>
+                        <div class="price">Starting from $150</div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div id="about" class="page">
+        <div class="container">
+            <h2>About Sweet Delights</h2>
+            <div class="grid-2">
+                <div>
+                    <h3>Our Story</h3>
+                    <p>Sweet Delights was founded in 1995 by Maria and Giuseppe Romano, two passionate bakers who immigrated from Italy with a dream of sharing their family's traditional recipes with the world. What started as a small neighborhood bakery has grown into a beloved cake company serving thousands of satisfied customers.</p>
+                    <p>Our commitment to quality, creativity, and customer satisfaction has been the cornerstone of our success. We believe that every cake should not only taste amazing but also create lasting memories for our customers.</p>
+                </div>
+                <div>
+                    <h3>Our Mission</h3>
+                    <p>To create exceptional cakes that bring joy to life's most precious moments while maintaining the highest standards of quality and craftsmanship.</p>
+                    
+                    <h3>Our Vision</h3>
+                    <p>To be the leading cake company in the region, known for our innovative designs, superior taste, and exceptional customer service.</p>
+                    
+                    <h3>Our Values</h3>
+                    <ul style="margin-left: 2rem;">
+                        <li>Quality ingredients and craftsmanship</li>
+                        <li>Customer satisfaction above all</li>
+                        <li>Innovation in design and flavors</li>
+                        <li>Community involvement and support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="products" class="page">
+        <div class="container">
+            <h2>Our Cake Collections</h2>
+            <div class="grid-3">
+                <div class="product-card">
+                    <div class="product-image">🎂</div>
+                    <div class="product-info">
+                        <h4>Classic Birthday Cakes</h4>
+                        <p>Traditional favorites including vanilla, chocolate, and strawberry with custom decorations.</p>
+                        <div class="price">$25 - $45</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">💒</div>
+                    <div class="product-info">
+                        <h4>Wedding Cakes</h4>
+                        <p>Multi-tier elegance with premium flavors and sophisticated designs.</p>
+                        <div class="price">$150 - $500</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🧁</div>
+                    <div class="product-info">
+                        <h4>Cupcakes</h4>
+                        <p>Individual treats perfect for parties and gifts, available in dozens of flavors.</p>
+                        <div class="price">$2.50 each</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🍰</div>
+                    <div class="product-info">
+                        <h4>Cheesecakes</h4>
+                        <p>Creamy, rich cheesecakes in classic and seasonal flavors.</p>
+                        <div class="price">$35 - $55</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🎪</div>
+                    <div class="product-info">
+                        <h4>Theme Cakes</h4>
+                        <p>Specially designed cakes for holidays, sports teams, and special occasions.</p>
+                        <div class="price">$40 - $80</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🏢</div>
+                    <div class="product-info">
+                        <h4>Corporate Cakes</h4>
+                        <p>Professional cakes for business events, launches, and corporate celebrations.</p>
+                        <div class="price">$60 - $120</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="custom" class="page">
+        <div class="container">
+            <h2>Custom Cake Orders</h2>
+            <p>Create the perfect cake for your special occasion. Our expert bakers will work with you to design and create a cake that exceeds your expectations.</p>
+            
+            <div class="grid-2">
+                <div>
+                    <h3>How It Works</h3>
+                    <div class="card">
+                        <div class="card-icon">1️⃣</div>
+                        <h4>Consultation</h4>
+                        <p>Schedule a consultation to discuss your vision, preferences, and requirements.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">2️⃣</div>
+                        <h4>Design</h4>
+                        <p>Our designers create sketches and proposals based on your specifications.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">3️⃣</div>
+                        <h4>Creation</h4>
+                        <p>Our skilled bakers bring your dream cake to life with attention to every detail.</p>
+                    </div>
+                </div>
+                <div>
+                    <h3>Order Your Custom Cake</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="event-type">Event Type</label>
+                            <select id="event-type">
+                                <option>Birthday</option>
+                                <option>Wedding</option>
+                                <option>Anniversary</option>
+                                <option>Corporate Event</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cake-size">Cake Size</label>
+                            <select id="cake-size">
+                                <option>Small (6-8 people)</option>
+                                <option>Medium (10-12 people)</option>
+                                <option>Large (15-20 people)</option>
+                                <option>Extra Large (25+ people)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="flavor">Preferred Flavor</label>
+                            <select id="flavor">
+                                <option>Vanilla</option>
+                                <option>Chocolate</option>
+                                <option>Strawberry</option>
+                                <option>Red Velvet</option>
+                                <option>Lemon</option>
+                                <option>Custom Flavor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="special-requests">Special Requests</label>
+                            <textarea id="special-requests" rows="4" placeholder="Describe your vision, color preferences, special decorations, etc."></textarea>
+                        </div>
+                        <button type="submit" class="cta-button">Request Quote</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gallery" class="page">
+        <div class="container">
+            <h2>Our Cake Gallery</h2>
+            <p>Browse through our collection of beautiful cakes created for various occasions.</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">🎂</div>
+                <div class="gallery-item">💒</div>
+                <div class="gallery-item">🧁</div>
+                <div class="gallery-item">🍰</div>
+                <div class="gallery-item">🎪</div>
+                <div class="gallery-item">🏢</div>
+                <div class="gallery-item">🎨</div>
+                <div class="gallery-item">🌹</div>
+                <div class="gallery-item">🎭</div>
+                <div class="gallery-item">🎵</div>
+                <div class="gallery-item">🏆</div>
+                <div class="gallery-item">🎄</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="news" class="page">
+        <div class="container">
+            <h2>News & Events</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>🎉 New Flavor Launch</h4>
+                    <p><strong>March 15, 2025</strong></p>
+                    <p>We're excited to announce our new Salted Caramel Chocolate cake, now available for all occasions!</p>
+                </div>
+                <div class="card">
+                    <h4>🏆 Award Winner</h4>
+                    <p><strong>February 28, 2025</strong></p>
+                    <p>Sweet Delights won "Best Wedding Cake" at the Regional Baking Competition for the third consecutive year!</p>
+                </div>
+                <div class="card">
+                    <h4>🎂 Birthday Party Packages</h4>
+                    <p><strong>February 10, 2025</strong></p>
+                    <p>New birthday party packages now available! Get decorations, games, and a custom cake all in one bundle.</p>
+                </div>
+                <div class="card">
+                    <h4>🌟 Customer Appreciation Day</h4>
+                    <p><strong>January 25, 2025</strong></p>
+                    <p>Thank you to all our loyal customers! Enjoy 20% off all orders during our appreciation week.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="recipes" class="page">
+        <div class="container">
+            <h2>Sweet Recipes</h2>
+            <p>Try these delicious recipes from our master bakers at home!</p>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <h4>🍰 Classic Vanilla Cake</h4>
+                    <p><strong>Ingredients:</strong></p>
+                    <ul style="text-align: left; margin-left: 2rem;">
+                        <li>2 cups all-purpose flour</li>
+                        <li>1½ cups sugar</li>
+                        <li>½ cup butter</li>
+                        <li>2 eggs</li>
+                        <li>1 cup milk</li>
+                        <li>2 tsp vanilla extract</li>
+                        <li>2 tsp baking powder</li>
+                    </ul>
+                    <p><strong>Instructions:</strong> Mix dry ingredients, cream butter and sugar, add eggs and vanilla, alternate milk and flour mixture. Bake at 350°F for 25-30 minutes.</p>
+                </div>
+                <div class="card">
+                    <h4>🍫 Chocolate Buttercream</h4>
+                    <p><strong>Ingredients:</strong></p>
+                    <ul style="text-align: left; margin-left: 2rem;">
+                        <li>1 cup butter, softened</li>
+                        <li>4 cups powdered sugar</li>
+                        <li>¾ cup cocoa powder</li>
+                        <li>½ cup heavy cream</li>
+                        <li>2 tsp vanilla extract</li>
+                    </ul>
+                    <p><strong>Instructions:</strong> Beat butter until fluffy, gradually add powdered sugar and cocoa. Add cream and vanilla, beat until smooth and spreadable.</p>
+                </div>
+                <div class="card">
+                    <h4>🧁 Perfect Cupcakes</h4>
+                    <p><strong>Tips for Success:</strong></p>
+                    <ul style="text-align: left; margin-left: 2rem;">
+                        <li>Room temperature ingredients</li>
+                        <li>Don't overmix the batter</li>
+                        <li>Fill liners 2/3 full</li>
+                        <li>Test doneness with toothpick</li>
+                        <li>Cool completely before frosting</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>🎂 Cake Decorating Tips</h4>
+                    <p><strong>Basic Techniques:</strong></p>
+                    <ul style="text-align: left; margin-left: 2rem;">
+                        <li>Level your cake layers</li>
+                        <li>Use a crumb coat first</li>
+                        <li>Chill between decorating steps</li>
+                        <li>Practice piping on parchment</li>
+                        <li>Use quality food coloring</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="franchise" class="page">
+        <div class="container">
+            <h2>Franchise Opportunities</h2>
+            <p>Join the Sweet Delights family and bring our delicious cakes to your community!</p>
+            
+            <div class="grid-2">
+                <div>
+                    <h3>Why Franchise with Sweet Delights?</h3>
+                    <div class="card">
+                        <div class="card-icon">📈</div>
+                        <h4>Proven Business Model</h4>
+                        <p>30+ years of successful operations with consistent growth and profitability.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🎓</div>
+                        <h4>Comprehensive Training</h4>
+                        <p>Complete training program covering baking, decorating, business operations, and customer service.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🛠️</div>
+                        <h4>Ongoing Support</h4>
+                        <p>Marketing assistance, operational support, and regular quality assurance visits.</p>
+                    </div>
+                </div>
+                <div>
+                    <h3>Investment Requirements</h3>
+                    <div class="card">
+                        <h4>Initial Investment</h4>
+                        <p><strong>$75,000 - $120,000</strong></p>
+                        <ul style="text-align: left; margin-left: 2rem;">
+                            <li>Franchise fee: $35,000</li>
+                            <li>Equipment: $25,000 - $40,000</li>
+                            <li>Initial inventory: $5,000</li>
+                            <li>Working capital: $10,000 - $40,000</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Ongoing Fees</h4>
+                        <ul style="text-align: left; margin-left: 2rem;">
+                            <li>Royalty: 6% of gross sales</li>
+                            <li>Marketing fee: 2% of gross sales</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="#contact" class="cta-button">Request Franchise Information</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="careers" class="page">
+        <div class="container">
+            <h2>Join Our Team</h2>
+            <p>We're always looking for passionate individuals to join the Sweet Delights family!</p>
+            
+            <div class="grid-2">
+                <div>
+                    <h3>Current Openings</h3>
+                    <div class="card">
+                        <h4>🧑‍🍳 Head Baker</h4>
+                        <p><strong>Location:</strong> Main Store</p>
+                        <p><strong>Experience:</strong> 5+ years</p>
+                        <p>Lead our baking team and ensure quality standards. Competitive salary and benefits.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🎨 Cake Decorator</h4>
+                        <p><strong>Location:</strong> Main Store</p>
+                        <p><strong>Experience
+                          :</strong> 2+ years</p>
+                        <p>Create beautiful custom designs for special occasions. Full-time position with growth opportunities.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🛒 Sales Associate</h4>
+                        <p><strong>Location:</strong> Multiple Locations</p>
+                        <p><strong>Experience:</strong> Entry Level</p>
+                        <p>Provide excellent customer service and assist with cake orders. Part-time and full-time available.</p>
+                    </div>
+                    <div class="card">
+                        <h4>📦 Delivery Driver</h4>
+                        <p><strong>Location:</strong> City-wide</p>
+                        <p><strong>Experience:</strong> Valid driver's license</p>
+                        <p>Deliver our delicious cakes safely to customers. Flexible schedule and competitive pay.</p>
+                    </div>
+                </div>
+                <div>
+                    <h3>Benefits & Perks</h3>
+                    <div class="card">
+                        <div class="card-icon">💼</div>
+                        <h4>Competitive Benefits</h4>
+                        <ul style="text-align: left; margin-left: 2rem;">
+                            <li>Health insurance</li>
+                            <li>Paid time off</li>
+                            <li>Employee discounts</li>
+                            <li>Retirement plan</li>
+                            <li>Professional development</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🎂</div>
+                        <h4>Sweet Perks</h4>
+                        <ul style="text-align: left; margin-left: 2rem;">
+                            <li>Free birthday cake</li>
+                            <li>50% employee discount</li>
+                            <li>Flexible scheduling</li>
+                            <li>Team building events</li>
+                            <li>Skills training programs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="#contact" class="cta-button">Apply Now</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact" class="page">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="grid-2">
+                <div>
+                    <h3>Get in Touch</h3>
+                    <div class="card">
+                        <div class="card-icon">📍</div>
+                        <h4>Visit Our Store</h4>
+                        <p>123 Sweet Street<br>
+                        Bakery District<br>
+                        Sweet City, SC 12345</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📞</div>
+                        <h4>Call Us</h4>
+                        <p>Phone: (555) 123-CAKE<br>
+                        Fax: (555) 123-4567<br>
+                        Toll-free: 1-800-SWEET-01</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">⏰</div>
+                        <h4>Business Hours</h4>
+                        <p>Monday - Friday: 7:00 AM - 8:00 PM<br>
+                        Saturday: 8:00 AM - 9:00 PM<br>
+                        Sunday: 9:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+                <div>
+                    <h3>Send Us a Message</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject">
+                                <option>General Inquiry</option>
+                                <option>Custom Order</option>
+                                <option>Franchise Information</option>
+                                <option>Career Opportunities</option>
+                                <option>Feedback/Complaint</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="cta-button">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Sweet Delights</h4>
+                <p>Creating magical moments with every bite since 1995. Your trusted partner for all life's sweet celebrations.</p>
+                <div class="social-links">
+                    <a href="#" title="Facebook">📘</a>
+                    <a href="#" title="Instagram">📷</a>
+                    <a href="#" title="Twitter">🐦</a>
+                    <a href="#" title="YouTube">📹</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#about">About Us</a>
+                <a href="#products">Our Products</a>
+                <a href="#custom">Custom Orders</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <a href="#custom">Custom Cakes</a>
+                <a href="#products">Wedding Cakes</a>
+                <a href="#products">Birthday Cakes</a>
+                <a href="#products">Corporate Events</a>
+                <a href="#franchise">Franchise</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <p>📍 123 Sweet Street, Sweet City, SC 12345</p>
+                <p>📞 (555) 123-CAKE</p>
+                <p>✉️ info@sweetdelights.com</p>
+                <p>🕒 Mon-Fri: 7AM-8PM</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p>&copy; 2025 Sweet Delights Bakery. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            const ctaButton = document.querySelector('.cta-button');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    navLinks.forEach(nl => nl.classList.remove('active'));
+                    pages.forEach(page => page.classList.remove('active'));
+
+                    this.classList.add('active');
+
+                    const targetPage = this.getAttribute('href').substring(1);
+                    document.getElementById(targetPage).classList.add('active');
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            if (ctaButton) {
+                ctaButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    navLinks.forEach(nl => nl.classList.remove('active'));
+                    pages.forEach(page => page.classList.remove('active'));
+
+                    document.querySelector('a[href="#products"]').classList.add('active');
+                    document.getElementById('products').classList.add('active');
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message! We will get back to you soon.');
+                    this.reset();
+                });
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href.startsWith('#') && href.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.card, .product-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
